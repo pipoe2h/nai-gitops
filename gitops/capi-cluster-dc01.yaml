@@ -1,14 +1,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: nai-capi-clusters
+  name: nai-capi-cluster-dc01
   namespace: kommander
 spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
     name: nai-gitops
-  path: ./management/capi-clusters
+  path: ./management/capi-clusters/sites/dc01
   prune: true
   wait: true
   timeout: 45m
