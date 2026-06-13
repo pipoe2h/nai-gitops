@@ -1,6 +1,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
+  labels:
+    kommander.d2iq.io/gitapps-gitrepository-type: custom
+    kommander.d2iq.io/gitrepository-type: catalog
   name: nai-gitops
   namespace: kommander
 spec:
