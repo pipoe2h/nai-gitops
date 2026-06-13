@@ -6,3 +6,4 @@ resources:
   - capi-cluster-dc02.yaml
   - workload-components-dc01.yaml
   - workload-components-dc02.yaml
+  - workspace-apps.yaml
