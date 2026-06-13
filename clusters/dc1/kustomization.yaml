@@ -1,0 +1,61 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../base
+
+patches:
+  - target:
+      kind: Cluster
+      name: nkp-cluster-template
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: nkp-nai-01
+
+      - op: replace
+        path: /metadata/labels/konvoy.d2iq.io~1cluster-name
+        value: nkp-nai-01
+
+      - op: replace
+        path: /spec/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/start
+        value: "10.42.245.52"
+
+      - op: replace
+        path: /spec/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/end
+        value: "10.42.245.52"
+
+      - op: replace
+        path: /spec/topology/variables/0/value/controlPlane/nutanix/machineDetails/cluster/name
+        value: "PHX-MKT245"
+
+      - op: replace
+        path: /spec/topology/variables/0/value/controlPlane/nutanix/machineDetails/image/name
+        value: "nkp-rocky-9.6-release-cis-1.34.1-20251206060914.qcow2"
+
+      - op: replace
+        path: /spec/topology/variables/0/value/controlPlane/nutanix/machineDetails/subnets/0/name
+        value: "primary"
+
+      - op: add
+        path: /spec/topology/variables/0/value/globalImageRegistryMirror
+        value:
+          url: https://registry.nutanixdemo.com/bootcamps
+
+      - op: replace
+        path: /spec/topology/variables/0/value/nutanix/controlPlaneEndpoint/host
+        value: "10.42.245.51"
+
+      - op: replace
+        path: /spec/topology/variables/0/value/nutanix/prismCentralEndpoint/url
+        value: "https://mkt245-pc.internal.nutanixdemo.com:9440"
+
+# replacements:
+#   - source:
+#       kind: Cluster
+#       fieldPath: metadata.name
+#     targets:
+#       - select:
+#           kind: Secret
+#         fieldPaths:
+#           - metadata.labels.[konvoy.d2iq.io/cluster-name]
