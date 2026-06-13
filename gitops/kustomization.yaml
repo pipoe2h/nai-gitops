@@ -5,4 +5,4 @@ resources:
   - capi-cluster-dc01.yaml
   - capi-cluster-dc02.yaml
   - workload-components-dc01.yaml
-  # - workload-components-dc02.yaml
+  - workload-components-dc02.yaml
