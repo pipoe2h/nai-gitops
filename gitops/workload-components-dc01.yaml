@@ -2,15 +2,19 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: nai-workload-components-dc01
-  namespace: kommander
+  namespace: nai-workspace
 spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
     name: nai-gitops
+    namespace: kommander
   path: ./workload/sites/dc01/components
   prune: true
   wait: true
   timeout: 10m
   dependsOn:
     - name: nai-capi-cluster-dc01
+  kubeConfig:
+    secretRef:
+      name: nkp-nai-01-kubeconfig
