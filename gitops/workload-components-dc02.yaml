@@ -15,7 +15,6 @@ spec:
   timeout: 10m
   dependsOn:
     - name: nai-capi-cluster-dc02
-      namespace: kommander
   kubeConfig:
     secretRef:
       name: nkp-nai-02-kubeconfig

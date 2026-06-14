@@ -2,12 +2,13 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: nai-workspace-apps
-  namespace: kommander
+  namespace: nai-workspace
 spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
     name: nai-gitops
+    namespace: kommander
   path: ./management/workspaces/nai/apps
   prune: true
   wait: true

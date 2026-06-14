@@ -2,19 +2,19 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../templates/workspace
+  - ../../templates/project
 
 patches:
   - target:
-      kind: Workspace
-      name: workspace-template
+      kind: Project
+      name: project-template
     patch: |-
       - op: replace
         path: /metadata/name
-        value: nai-workspace
+        value: nai-db
       - op: replace
         path: /spec/namespaceName
-        value: nai-workspace
+        value: nai-db
       - op: replace
         path: /metadata/annotations/kommander.mesosphere.io~1display-name
-        value: NAI
+        value: nai-db
