@@ -1,0 +1,43 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: nai-db
+  namespace: nai-db
+spec:
+  instances: 1
+
+  storage:
+    size: 10Gi
+
+  bootstrap:
+    initdb:
+      database: nai_iep
+      owner: nai-api-user
+      secret:
+        name: nai-db-app
+      postInitSQL:
+        - ALTER ROLE "nai-api-user" WITH SUPERUSER CREATEDB CREATEROLE;
+
+  postgresql:
+    parameters:
+      max_connections: "1000"
+
+  monitoring:
+    enablePodMonitor: true
+
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://nai-db/dc01
+      endpointURL: http://10.42.245.71
+      s3Credentials:
+        accessKeyId:
+          name: objects-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: objects-creds
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+        maxParallel: 8
+      data:
+        compression: gzip

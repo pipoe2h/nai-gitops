@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: fifteen-minute-schedule
+  namespace: nai-db
+spec:
+  schedule: "0 */15 * * * *"
+  backupOwnerReference: self
+  cluster:
+    name: nai-db

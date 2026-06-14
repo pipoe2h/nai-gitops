@@ -3,4 +3,3 @@ kind: Kustomization
 
 resources:
   - cnpg-cluster.yaml
-  - schedulebackup.yaml

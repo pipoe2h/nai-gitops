@@ -1,0 +1,20 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: k8gb-dc02
+  namespace: nai-workspace
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: nai-gitops
+    namespace: kommander
+  path: ./workload/sites/dc02/k8gb
+  prune: true
+  wait: true
+  timeout: 10m
+  dependsOn:
+    - name: k8gb-dc01
+  kubeConfig:
+    secretRef:
+      name: nkp-nai-02-kubeconfig
