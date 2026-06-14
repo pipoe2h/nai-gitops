@@ -5,6 +5,7 @@ metadata:
   namespace: k8gb
 spec:
   interval: 10m
+  serviceAccountName: k8gb-helm
 
   chart:
     spec:
