@@ -1,0 +1,16 @@
+apiVersion: apps.kommander.d2iq.io/v1alpha3
+kind: AppDeployment
+metadata:
+  name: opentelemetry-operator
+  namespace: nai-workspace
+spec:
+  appRef:
+    kind: App
+    name: opentelemetry-operator-0.102.0
+
+  clusterSelector:
+    matchExpressions:
+      - key: nai.nutanix.com/profile
+        operator: In
+        values:
+          - agent-gateway

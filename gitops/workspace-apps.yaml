@@ -13,6 +13,5 @@ spec:
   wait: true
   timeout: 20m
   dependsOn:
-    - name: nai-workspaces
-    # - name: nai-capi-cluster-dc01
-    # - name: nai-capi-cluster-dc02
+    - name: nai-capi-cluster-dc01
+    - name: nai-capi-cluster-dc02
