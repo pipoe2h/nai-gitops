@@ -1,0 +1,299 @@
+gateway:
+  replicaCount: "1"
+  certManager:
+    selfSigned: true
+  envoyDeployment:
+    container:
+      image: "registry.nutanixdemo.com/bootcamps/nutanix/nai-envoy:distroless-v1.37.0"
+
+naiDatabase:
+  external: true
+  postgresql:
+    postgresHost: nai-db-rw.nai-db.svc.cluster.local
+    postgresSSLMode: require
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+
+naiApi:
+  naiApiImage:
+    image: registry.nutanixdemo.com/bootcamps/nutanix/nai-api
+  replicaCount: "1"
+
+  naiApiResources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 2Gi
+
+  naiMigrateInitContainerResources:
+    requests:
+      cpu: 100m
+      memory: 50Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi
+
+  naiMigrateJobResources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi
+
+naiLabs:
+  enabled: true
+
+  labsImage:
+    image: registry.nutanixdemo.com/bootcamps/nutanix/nai-rag-app
+    tag: v2.7.0
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+
+otelCollector:
+  resources:
+    requests:
+      cpu: 25m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 256Mi
+
+targetAllocator:
+  resources:
+    requests:
+      cpu: 25m
+      memory: 16Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+
+oauth2Proxy:
+  image:
+    repository: registry.nutanixdemo.com/bootcamps/nai-oauth2-proxy
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+# Actual oauth2-proxy chart used by NAI
+oauth2-proxy:
+  image:
+    repository: registry.nutanixdemo.com/bootcamps/nai-oauth2-proxy
+    tag: v7.9.0
+
+redis:
+  master:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 32Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+
+  sentinel:
+    resources:
+      requests:
+        cpu: 25m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
+
+naiAgent:
+  agentImage:
+    image: registry.nutanixdemo.com/bootcamps/nutanix/nai-agent-app
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 750m
+      memory: 2Gi
+
+naiInferenceUi:
+  naiUiImage:
+    image: registry.nutanixdemo.com/bootcamps/nutanix/nai-inference-ui
+    tag: v2.7.0
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+naiIam:
+  iamProxy:
+    image: registry.nutanixdemo.com/bootcamps/nai-iam-proxy
+    tag: v2.7.0
+
+  iamProxyControlPlane:
+    image: registry.nutanixdemo.com/bootcamps/nutanix/nai-iam-proxy-control-plane
+    tag: v2.7.0
+
+  iamUi:
+    image: registry.nutanixdemo.com/bootcamps/nai-iam-ui
+    tag: v2.7.0
+
+  iamUserAuthn:
+    image: registry.nutanixdemo.com/bootcamps/nai-iam-user-authn
+    tag: v2.7.0
+
+  iamThemis:
+    image: registry.nutanixdemo.com/bootcamps/nutanix/nai-iam-themis
+    tag: v2.7.0
+
+  iamThemisBootstrap:
+    image: registry.nutanixdemo.com/bootcamps/nai-iam-bootstrap
+    tag: v2.7.0
+
+naiRedis:
+  naiRedisImage:
+    name: registry.nutanixdemo.com/bootcamps/nutanix/nai-redis
+
+  naiRedisResources:
+    requests:
+      cpu: 50m
+      memory: 16Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+naiJobs:
+  naiJobsImage:
+    image: registry.nutanixdemo.com/bootcamps/nutanix/nai-jobs
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 50Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+
+nai-clickhouse-operator:
+  operator:
+    image:
+      registry: registry.nutanixdemo.com/bootcamps
+      repository: nutanix/nai-clickhouse-operator
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+
+  metrics:
+    image:
+      registry: registry.nutanixdemo.com/bootcamps
+      repository: nutanix/nai-clickhouse-metrics-exporter
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
+
+nai-clickhouse-schemas:
+  image:
+    registry: registry.nutanixdemo.com/bootcamps
+    repository: nutanix/nai-clickhouse-schemas
+
+nai-clickhouse-server:
+  clickhouse:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        cpu: "1"
+        memory: 1Gi
+    image:
+      registry: registry.nutanixdemo.com/bootcamps
+      repository: nutanix/nai-clickhouse-server
+    initContainers:
+      addUdf:
+        image:
+          registry: registry.nutanixdemo.com/bootcamps
+          repository: nutanix/nai-clickhouse-udf
+      waitForKeeper:
+        image:
+          registry: registry.nutanixdemo.com/bootcamps
+          repository: nutanix/nai-jobs
+
+nai-clickhouse-keeper:
+  clickhouseKeeper:
+    image:
+      registry: registry.nutanixdemo.com/bootcamps
+      repository: nutanix/nai-clickhouse-keeper
+    resources:
+      requests:
+        cpu: 25m
+        memory: 128Mi
+      limits:
+        cpu: 100m
+        memory: 256Mi
+
+# IEP Operator
+naiIepOperator:
+  iepOperatorImage:
+    image: registry.nutanixdemo.com/bootcamps/nutanix/nai-iep-operator
+    tag: v2.7.0
+
+# OpenTelemetry images
+naiMonitoring:
+  opentelemetry:
+    collectorImage: registry.nutanixdemo.com/bootcamps/nutanix/nai-opentelemetry-collector-contrib:0.141.0
+
+    targetAllocator:
+      image:
+        repository: registry.nutanixdemo.com/bootcamps/nutanix/nai-target-allocator
+        tag: 0.141.0
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
+
+ai-gateway-helm:
+  extProc:
+    image:
+      repository: registry.nutanixdemo.com/bootcamps/nutanix/nai-ai-gateway-extproc
+
+  controller:
+    image:
+      repository: registry.nutanixdemo.com/bootcamps/nutanix/nai-ai-gateway-controller
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
