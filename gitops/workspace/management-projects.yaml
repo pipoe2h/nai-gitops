@@ -14,6 +14,6 @@ spec:
   prune: true
   wait: true
   timeout: 5m
-  dependsOn:
-    - name: nai-workspaces
-      namespace: kommander
+  # dependsOn:
+  #   - name: nai-workspaces
+  #     namespace: kommander
