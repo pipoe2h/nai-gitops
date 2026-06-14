@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
   - management-projects.yaml
   - workspace-apps.yaml
-  # - capi-cluster-dc01.yaml
-  # - capi-cluster-dc02.yaml
+  - cluster-dc01.yaml
+  - cluster-dc02.yaml
   # - workload-components-dc01.yaml
   # - workload-components-dc02.yaml
   # - nai-db-dc01.yaml

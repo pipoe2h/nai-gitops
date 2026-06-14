@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../templates/nkp-cluster
+  - ../../../templates/cluster/nkp-cluster
 
 patches:
   - target:
@@ -11,7 +11,7 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/name
-        value: nkp-nai-01
+        value: nkp-nai-02
 
       - op: add
         path: /metadata/labels/nai.nutanix.com~1profile
@@ -19,35 +19,35 @@ patches:
 
       - op: add
         path: /metadata/labels/nai.nutanix.com~1site
-        value: dc01
+        value: dc02
 
       - op: replace
         path: /metadata/labels/konvoy.d2iq.io~1cluster-name
-        value: nkp-nai-01
+        value: nkp-nai-02
 
       - op: replace
         path: /spec/topology/variables/0/value/addons/ccm/credentials/secretRef/name
-        value: nkp-nai-01-pc-credentials
+        value: nkp-nai-02-pc-credentials
 
       - op: replace
         path: /spec/topology/variables/0/value/addons/csi/providers/nutanix/credentials/secretRef/name
-        value: nkp-nai-01-pc-credentials-for-csi
+        value: nkp-nai-02-pc-credentials-for-csi
 
       - op: replace
         path: /spec/topology/variables/0/value/addons/konnectorAgent/credentials/secretRef/name
-        value: nkp-nai-01-pc-credentials-for-konnector-agent
+        value: nkp-nai-02-pc-credentials-for-konnector-agent
 
       - op: replace
         path: /spec/topology/variables/0/value/nutanix/prismCentralEndpoint/credentials/secretRef/name
-        value: nkp-nai-01-pc-credentials
+        value: nkp-nai-02-pc-credentials
 
       - op: replace
         path: /spec/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/start
-        value: "10.42.245.52"
+        value: "10.42.245.54"
 
       - op: replace
         path: /spec/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/end
-        value: "10.42.245.52"
+        value: "10.42.245.54"
 
       - op: replace
         path: /spec/topology/variables/0/value/controlPlane/nutanix/machineDetails/cluster/name
@@ -68,11 +68,35 @@ patches:
 
       - op: replace
         path: /spec/topology/variables/0/value/nutanix/controlPlaneEndpoint/host
-        value: "10.42.245.51"
+        value: "10.42.245.53"
 
       - op: replace
         path: /spec/topology/variables/0/value/nutanix/prismCentralEndpoint/url
         value: "https://mkt245-pc.internal.nutanixdemo.com:9440"
+
+  # - target:
+  #     kind: Secret
+  #     name: pc-credentials
+  #   patch: |-
+  #     - op: replace
+  #       path: /metadata/name
+  #       value: nkp-nai-02-pc-credentials
+
+  # - target:
+  #     kind: Secret
+  #     name: pc-credentials-for-csi
+  #   patch: |-
+  #     - op: replace
+  #       path: /metadata/name
+  #       value: nkp-nai-02-pc-credentials-for-csi
+
+  # - target:
+  #     kind: Secret
+  #     name: pc-credentials-for-konnector-agent
+  #   patch: |-
+  #     - op: replace
+  #       path: /metadata/name
+  #       value: nkp-nai-02-pc-credentials-for-konnector-agent
 
 # replacements:
 #   - source:
