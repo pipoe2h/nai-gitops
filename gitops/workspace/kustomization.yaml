@@ -8,6 +8,6 @@ resources:
   - workload-components-dc01.yaml
   - workload-components-dc02.yaml
   - nai-db-dc01.yaml
-  # - nai-db-dc02.yaml
+  - nai-db-dc02.yaml
   - k8gb-dc01.yaml
   - k8gb-dc02.yaml
