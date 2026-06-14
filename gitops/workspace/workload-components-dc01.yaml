@@ -14,7 +14,7 @@ spec:
   wait: true
   timeout: 10m
   dependsOn:
-    - name: nai-capi-cluster-dc01
+    - name: nai-cluster-dc01
   kubeConfig:
     secretRef:
       name: nkp-nai-01-kubeconfig
