@@ -12,6 +12,10 @@ spec:
       secret:
         name: nai-db-app
 
+  replica:
+    enabled: true
+    source: nai-db-dc01
+
   externalClusters:
     - name: nai-db-dc01
       barmanObjectStore:
