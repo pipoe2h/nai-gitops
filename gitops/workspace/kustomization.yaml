@@ -7,5 +7,5 @@ resources:
   - cluster-dc02.yaml
   - workload-components-dc01.yaml
   - workload-components-dc02.yaml
-  - nai-db-dc01.yaml
+  # - nai-db-dc01.yaml
   - k8gb-dc01.yaml
