@@ -14,11 +14,10 @@ patches:
       name: nai-db
       namespace: nai-db
     patch: |-
-      - op: replace
-        path: /spec/replica/enabled
-        value: false
-      - op: remove
-        path: /spec/replica/source
+      - op: add
+        path: /spec/replica
+        value:
+          enabled: false
       - op: add
         path: /spec/backup
         value:
