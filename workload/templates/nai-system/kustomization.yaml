@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - helmrepository.yaml
-  - nai-operator
-  - nai-core
-  - sa.yaml
   - clusterrolebinding.yaml
+  - sa.yaml
+  # - nai-operator
+  # - nai-core
