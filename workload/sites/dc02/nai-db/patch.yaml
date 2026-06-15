@@ -30,4 +30,3 @@ spec:
             key: ACCESS_SECRET_KEY
         wal:
           maxParallel: 8
-      retentionPolicy: "30d"
