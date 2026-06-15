@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: nai-system-dc02
+  name: dr-nai-to-dc02
   namespace: nai-workspace
 spec:
   interval: 1m
@@ -9,12 +9,11 @@ spec:
     kind: GitRepository
     name: nai-gitops
     namespace: kommander
-  path: ./workload/sites/dc02/nai-system
+  path: ./workload/sites/dc02/dr
   prune: true
   wait: true
-  timeout: 10m
-  dependsOn:
-    - name: nai-system-dc01
+  timeout: 30m
+  suspend: false
   kubeConfig:
     secretRef:
       name: nkp-nai-02-kubeconfig

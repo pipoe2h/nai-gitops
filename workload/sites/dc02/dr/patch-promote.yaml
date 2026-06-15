@@ -1,0 +1,8 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: nai-db-dc02
+  namespace: nai-db
+spec:
+  replica:
+    enabled: false
