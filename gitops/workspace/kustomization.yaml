@@ -12,4 +12,4 @@ resources:
   - k8gb-dc01.yaml
   - k8gb-dc02.yaml
   - nai-system-dc01.yaml
-  - nai-system-dc02.yaml
+  # - nai-system-dc02.yaml
