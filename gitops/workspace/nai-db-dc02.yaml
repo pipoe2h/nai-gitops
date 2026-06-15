@@ -9,8 +9,8 @@ spec:
     kind: GitRepository
     name: nai-gitops
     namespace: kommander
-  path: ./workload/sites/dc02/nai-db # --- COMMENT FOR TRIGGERING THE DR ---
-  # path: ./workload/sites/dc02/dr # --- UNCOMMENT FOR TRIGGERING THE DR ---
+  # path: ./workload/sites/dc02/nai-db # --- COMMENT FOR TRIGGERING THE DR ---
+  path: ./workload/sites/dc02/dr # --- UNCOMMENT FOR TRIGGERING THE DR ---
   prune: true
   wait: true
   timeout: 10m
